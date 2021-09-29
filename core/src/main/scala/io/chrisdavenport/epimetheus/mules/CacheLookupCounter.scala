@@ -6,7 +6,6 @@ import io.chrisdavenport.mules._
 import cats.effect._
 import cats._
 import cats.implicits._
-import shapeless.Sized
 
 final class CacheLookupCounter[F[_]: Sync] private (private val c: UnlabelledCounter[F, CacheLookupCounterStatus]){
   import CacheLookupCounter._
