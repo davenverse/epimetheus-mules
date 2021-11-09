@@ -7,7 +7,7 @@ import cats.effect._
 
 class CacheLookupCounterSpec extends mutable.Specification {
 
-  implicit val T = IO.timer(scala.concurrent.ExecutionContext.global)
+  import cats.effect.unsafe.implicits.global
 
   "CacheLookupCounter" should {
     "modify a cache" in {
@@ -20,16 +20,17 @@ class CacheLookupCounterSpec extends mutable.Specification {
         _ <- newCache.lookup("yellow")
         _ <- newCache.lookup("green")
         out <- cr.write004
-      } yield out
+      } yield dropCreatedLines(out, 2)
 
       val expected = 
       """# HELP mules_cache_lookup_total Cache Lookup Status Counter.
         |# TYPE mules_cache_lookup_total counter
         |mules_cache_lookup_total{cache_name="foo",status="miss",} 1.0
         |mules_cache_lookup_total{cache_name="foo",status="hit",} 1.0
-        |""".stripMargin
+        |# HELP mules_cache_lookup_created Cache Lookup Status Counter.
+        |# TYPE mules_cache_lookup_created gauge""".stripMargin
 
-      test.unsafeRunSync must_=== expected
+      test.unsafeRunSync() must_=== expected
     }
 
     "modify multiple caches" in {
@@ -46,7 +47,7 @@ class CacheLookupCounterSpec extends mutable.Specification {
         _ <- cache2.insert(3, 0D)
         _ <- newCache2.lookup(3)
         out <- cr.write004
-      } yield out
+      } yield dropCreatedLines(out, 3)
 
       val expected = 
       """# HELP mules_cache_lookup_total Cache Lookup Status Counter.
@@ -54,10 +55,14 @@ class CacheLookupCounterSpec extends mutable.Specification {
         |mules_cache_lookup_total{cache_name="foo",status="miss",} 1.0
         |mules_cache_lookup_total{cache_name="bar",status="hit",} 1.0
         |mules_cache_lookup_total{cache_name="foo",status="hit",} 1.0
-        |""".stripMargin
+        |# HELP mules_cache_lookup_created Cache Lookup Status Counter.
+        |# TYPE mules_cache_lookup_created gauge""".stripMargin
 
-      test.unsafeRunSync must_=== expected
+      test.unsafeRunSync() must_=== expected
     }
   }
+
+  private def dropCreatedLines(s: String, n: Int): String =
+    s.linesIterator.toList.dropRight(n).mkString("\n")
 
 }
