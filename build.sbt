@@ -3,6 +3,7 @@ ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.6")
 lazy val `epimetheus-mules` = project.in(file("."))
   .disablePlugins(MimaPlugin)
   .enablePlugins(NoPublishPlugin)
+  .aggregate(core, site)
 
 lazy val core = project.in(file("core"))
   .settings(commonSettings)
