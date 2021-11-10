@@ -26,13 +26,8 @@ val mulesV = "0.5.0-M2"
 
 val specs2V = "4.8.3"
 
-val kindProjectorV = "0.13.2"
-val betterMonadicForV = "0.3.1"
-
 // General Settings
 lazy val commonSettings = Seq(
-  addCompilerPlugin("org.typelevel" %% "kind-projector" % kindProjectorV cross CrossVersion.full),
-  addCompilerPlugin("com.olegpy" %% "better-monadic-for" % betterMonadicForV),
   libraryDependencies ++= Seq(
     "org.typelevel"               %% "cats-core"                  % catsV,
     "org.typelevel"               %% "cats-effect"                % catsEffectV,
