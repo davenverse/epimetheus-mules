@@ -25,7 +25,7 @@ val catsEffectV = "3.2.9"
 val epimetheusV = "0.5.0-M2"
 val mulesV = "0.5.0-M2"
 
-val specs2V = "4.8.3"
+val specs2V = "4.13.1"
 
 // General Settings
 lazy val commonSettings = Seq(
