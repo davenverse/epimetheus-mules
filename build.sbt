@@ -1,4 +1,4 @@
-ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.8")
+ThisBuild / crossScalaVersions := Seq("2.12.17", "2.13.10")
 
 lazy val `epimetheus-mules` = project.in(file("."))
   .disablePlugins(MimaPlugin)
@@ -20,12 +20,12 @@ lazy val site = project.in(file("site"))
     micrositeDescription := "Metrics for Mules Caches",
   )
 
-val catsV = "2.7.0"
-val catsEffectV = "3.3.12"
-val epimetheusV = "0.5.0-M2"
+val catsV = "2.9.0"
+val catsEffectV = "3.3.14"
+val epimetheusV = "0.5.0"
 val mulesV = "0.5.0"
 
-val specs2V = "4.15.0"
+val specs2V = "4.20.0"
 
 // General Settings
 lazy val commonSettings = Seq(
