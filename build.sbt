@@ -1,4 +1,4 @@
-ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.8")
+ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.11")
 
 lazy val `epimetheus-mules` = project.in(file("."))
   .disablePlugins(MimaPlugin)
