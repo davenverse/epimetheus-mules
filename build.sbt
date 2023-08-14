@@ -20,7 +20,7 @@ lazy val site = project.in(file("site"))
     micrositeDescription := "Metrics for Mules Caches",
   )
 
-val catsV = "2.9.0"
+val catsV = "2.10.0"
 val catsEffectV = "3.3.14"
 val epimetheusV = "0.5.0"
 val mulesV = "0.7.0"
