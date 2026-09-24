@@ -13,6 +13,10 @@ ThisBuild / tlCiReleaseBranches := Seq("main")
 
 val Scala213tl = "2.13.18"
 ThisBuild / crossScalaVersions := Seq("2.12.20",  Scala213tl)
+
+// 0.5.0 was published for 2.13 and 3 but not 2.12, whose last artifact is 0.4.0.
+// Tell MiMa that 2.12 support resumes here rather than hunting a 2.12 0.5.0.
+ThisBuild / tlVersionIntroduced := Map("2.12" -> "0.5.1")
 ThisBuild / scalaVersion := Scala213tl
 
 // Compiler settings DavenversePlugin injected globally. sbt-typelevel-ci-release
