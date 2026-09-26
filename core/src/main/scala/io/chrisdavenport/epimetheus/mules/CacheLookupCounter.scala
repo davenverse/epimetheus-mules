@@ -21,8 +21,8 @@ object CacheLookupCounter {
 
 
   def register[F[_]: Sync](
-    cr: CollectorRegistry[F],
-    name: Name = Name("mules_cache_lookup_total")
+    cr: PrometheusRegistry[F],
+    name: Name = Name("mules_cache_lookup")
   ): F[CacheLookupCounter[F]] = 
     Counter.labelled(
       cr,
@@ -34,7 +34,7 @@ object CacheLookupCounter {
 
 
   def meteredMemoryCache[F[_]: Sync, K, V](
-    cr: CollectorRegistry[F],
+    cr: PrometheusRegistry[F],
     name: Name,
     mc: MemoryCache[F, K, V]): F[MemoryCache[F, K, V]] = 
       Counter.labelled(
@@ -49,7 +49,7 @@ object CacheLookupCounter {
       )
 
   def meteredLookup[F[_]: Sync, K, V](
-    cr: CollectorRegistry[F],
+    cr: PrometheusRegistry[F],
     name: Name,
     lookup: Lookup[F, K, V]
   ): F[Lookup[F, K, V]] =
@@ -62,7 +62,7 @@ object CacheLookupCounter {
     ).map(new SingleLookupCounted(_, lookup))
 
   def meteredCache[F[_]: Sync, K, V](
-    cr: CollectorRegistry[F],
+    cr: PrometheusRegistry[F],
     name: Name,
     cache: Cache[F, K, V]
   ): F[Cache[F, K, V]] = 
