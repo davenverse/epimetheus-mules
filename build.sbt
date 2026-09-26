@@ -1,4 +1,4 @@
-ThisBuild / tlBaseVersion := "0.5" // current series x.y
+ThisBuild / tlBaseVersion := "0.6" // current series x.y
 
 ThisBuild / organization := "io.chrisdavenport"
 ThisBuild / organizationName := "Christopher Davenport"
@@ -13,7 +13,7 @@ ThisBuild / developers := List(
 ThisBuild / tlCiReleaseBranches := Seq()
 
 val Scala213tl = "2.13.18"
-ThisBuild / crossScalaVersions := Seq("2.12.20",  Scala213tl)
+ThisBuild / crossScalaVersions := Seq(Scala213tl)
 
 // 0.5.0 was published for 2.13 and 3 but not 2.12, whose last artifact is 0.4.0.
 // Tell MiMa that 2.12 support resumes here rather than hunting a 2.12 0.5.0.
@@ -62,10 +62,10 @@ lazy val site = project.in(file("site"))
   .settings(
   )
 
-val catsV = "2.9.0"
-val catsEffectV = "3.3.14"
-val epimetheusV = "0.5.0"
-val mulesV = "0.7.0"
+val catsV = "2.13.0"
+val catsEffectV = "3.7.1"
+val epimetheusV = "0.7.1"
+val mulesV = "0.8.0"
 
 val specs2V = "4.20.0"
 
